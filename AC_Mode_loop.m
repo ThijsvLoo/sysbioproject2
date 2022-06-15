@@ -19,7 +19,7 @@
 % Author: Isma Zulfiqar
 
 close all; clear; clc; tic
-hearingLossMode = true;
+hearingLossMode = false;
 
 load('Stim288.mat')
 disp(['Modeling spectro-temporal processing in 2 core (A1,R) and 2 belt (Slow, Fast) areas of the AC:' newline])
@@ -69,7 +69,7 @@ for i=1:numSounds
 
     %     t = [0:(duration*Fs)-1]'/Fs;
     % s = (1+(mod_depth*sin(2*pi*mod_rate*t -pi/2))) .* sin(2*pi*carrier_freq*t);
-    s = stim(i,:)'*100;
+    s = stim(i,:)'*1000;
     %     figure(1); plot(t,s); xlabel('Time'); ylabel('Amplitude'); title('Sound waveform');
 
     % =============================================================================================
@@ -380,25 +380,39 @@ for i=1:numSounds
 %     avg_FR_ex_slow_freq(i,:) = mean(squeeze(EE3),2);
 %     avg_FR_ex_fast_time(i,:) = mean(squeeze(EE4),1);
 %     avg_FR_ex_fast_freq(i,:) = mean(squeeze(EE4),2);
-    sound_data(i,1) = mean(mean(EE1,1));
-    sound_data(i,2) = std(mean(EE1,1));
-    sound_data(i,3) = mean(mean(EE1,2));
-    sound_data(i,4) = std(mean(EE1,2));
-    
-    sound_data(i,5) = mean(mean(EE2,1));
-    sound_data(i,6) = std(mean(EE2,1));
-    sound_data(i,7) = mean(mean(EE2,2));
-    sound_data(i,8) = std(mean(EE2,2));
 
-    sound_data(i,9) = mean(mean(EE3,1));
-    sound_data(i,10) = std(mean(EE3,1));
-    sound_data(i,11) = mean(mean(EE3,2));
-    sound_data(i,12) = std(mean(EE3,2));
-
-    sound_data(i,13) = mean(mean(EE4,1));
-    sound_data(i,14) = std(mean(EE4,1));
-    sound_data(i,15) = mean(mean(EE4,2));
-    sound_data(i,16) = std(mean(EE4,2));
+    %area A1
+    sound_data(i,1) = mean(EE1,'all');%mean frequency
+    sound_data(i,2) = std(mean(EE1,1)); %std over time
+    sound_data(i,3) = max(mean(EE1,1)); %max over time
+    sound_data(i,4) = length(findpeaks(mean(EE1,1))); %number of peaks over time
+    sound_data(i,5) = std(mean(EE1,2)); %std over freq
+    sound_data(i,6) = max(mean(EE1,2)); %max over freq
+    sound_data(i,7) = length(findpeaks(mean(EE1,2))); %number of peaks over freq
+    %area R
+    sound_data(i,8) = mean(EE2,'all');%mean frequency
+    sound_data(i,9) = std(mean(EE2,1));
+    sound_data(i,10) = max(mean(EE2,1));
+    sound_data(i,11) = length(findpeaks(mean(EE2,1))); %number of peaks over time
+    sound_data(i,12) = std(mean(EE2,2));
+    sound_data(i,12) = std(mean(EE2,2));
+    sound_data(i,14) = length(mean(EE2,2)); %number of peaks over freq
+    %area slow
+    sound_data(i,15) = mean(EE3,'all');%mean frequency
+    sound_data(i,16) = std(mean(EE3,1));
+    sound_data(i,17) = max(mean(EE3,1));
+    sound_data(i,18) = length(findpeaks(mean(EE3,1))); %number of peaks over time
+    sound_data(i,19) = std(mean(EE3,2));
+    sound_data(i,20) = max(mean(EE3,2));
+    sound_data(i,21) = length(mean(EE3,2)); %number of peaks over freq
+    %area fast
+    sound_data(i,2) = mean(EE4,'all');%mean frequency
+    sound_data(i,23) = std(mean(EE4,1));
+    sound_data(i,24) = std(mean(EE4,1));
+    sound_data(i,25) = length(findpeaks(mean(EE4,1))); %number of peaks over time
+    sound_data(i,26) = std(mean(EE4,2));
+    sound_data(i,27) = std(mean(EE4,2));
+    sound_data(i,28) = length(mean(EE4,2)); %number of peaks over freq
 
     disp(strcat('Finished iteration ', num2str(i), '! Time Elapsed = ', num2str(toc), ' sec'));
 end
@@ -410,7 +424,6 @@ end
 % save(strcat('allsoundavgs', '.mat'),"avg_FR_ex_fast_freq","avg_FR_ex_fast_time","avg_FR_ex_slow_freq","avg_FR_ex_slow_time", "avg_FR_ex_R_freq","avg_FR_ex_R_time","avg_FR_ex_A1_freq","avg_FR_ex_A1_time")
 % save('spectrograms.mat',"inhibitory_spec__fast", "inhibitory_spec__slow", "inhibitory_spec__R", "inhibitory_spec__A1", ...
 %     "exitatory_spec__fast", "exitatory_spec__slow", "exitatory_spec__R", "exitatory_spec__A1" )
-
 %     save(strcat('spectrograms', '.mat'), "exitatory_spec__fast", "exitatory_spec__slow", "exitatory_spec__R", "exitatory_spec__A1",'-v7.3')
 
 % end
