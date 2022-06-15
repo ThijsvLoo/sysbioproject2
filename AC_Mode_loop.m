@@ -2,7 +2,7 @@
 
 % This script embedded functions from :
 %       Wilson Cowan cortical model
-%       Wilson HR. Computation by excitatory and inhibitory networks. In: Spikes, Decisions & Actions: Dynamical Foundations of Neuroscience. Oxford UK: Oxford University Press; 1999. p. 88–115.
+%       Wilson HR. Computation by excitatory and inhibitory networks. In: Spikes, Decisions & Actions: Dynamical Foundations of Neuroscience. Oxford UK: Oxford University Press; 1999. p. 88â€“115.
 %
 %       4th order gammatone filterbank, Ma N, Green P, Barker J, Coy A. Exploiting correlogram structure for robust speech recognition with multiple speech sources. Speech Commun. 2007;
 %       Available at: http://www.dcs.shef.ac.uk/~ning/resources/gammatone/
@@ -78,7 +78,7 @@ for i=1:numSounds
 
     %% Applying gammatone filterbank
     %     disp('Passing the sound through gammatone filterbank ... ')
-    if hearingLossMode = true
+    if hearingLossMode
         bm_upsampled = gammatoneFast(s,F,Fs);
     else
         bm_upsampled = gammatoneFast(s,F,Fs); 
@@ -402,7 +402,11 @@ for i=1:numSounds
 
     disp(strcat('Finished iteration ', num2str(i), '! Time Elapsed = ', num2str(toc), ' sec'));
 end
-save('soundData.mat', "sound_data")
+if hearingLossMode
+    save('soundDataHL.mat', "sound_data")
+else
+    save('soundData.mat', "sound_data")
+end
 % save(strcat('allsoundavgs', '.mat'),"avg_FR_ex_fast_freq","avg_FR_ex_fast_time","avg_FR_ex_slow_freq","avg_FR_ex_slow_time", "avg_FR_ex_R_freq","avg_FR_ex_R_time","avg_FR_ex_A1_freq","avg_FR_ex_A1_time")
 % save('spectrograms.mat',"inhibitory_spec__fast", "inhibitory_spec__slow", "inhibitory_spec__R", "inhibitory_spec__A1", ...
 %     "exitatory_spec__fast", "exitatory_spec__slow", "exitatory_spec__R", "exitatory_spec__A1" )
