@@ -20,9 +20,9 @@
 
 close all; clear; clc; tic
 hearingLossMode = false;
-CI_mode = false;
+CI_mode = true;
 
-%load('newmat.mat')
+load('newmat.mat')
 %stim=newmat;
 %fs=16000;
 
@@ -59,6 +59,9 @@ for i=1:numSounds
     % t = [0:(duration*Fs)-1]'/Fs;
     % s = (1+(mod_depth*sin(2*pi*mod_rate*t -pi/2))) .* sin(2*pi*carrier_freq*t);
     s = stim(i,:)'*1000;
+    if CI_mode
+        s = newmat(1, 1:16000)' .* 1000;
+    end
     %     figure(1); plot(t,s); xlabel('Time'); ylabel('Amplitude'); title('Sound waveform');
 
     % =============================================================================================
