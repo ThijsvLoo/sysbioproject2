@@ -19,7 +19,12 @@
 % Author: Isma Zulfiqar
 
 close all; clear; clc; tic
-hearingLossMode = false;
+hearingLossMode = true;
+CI_mode = false;
+
+%load('newmat.mat')
+%stim=newmat;
+%fs=16000;
 
 load('Stim288.mat')
 disp(['Modeling spectro-temporal processing in 2 core (A1,R) and 2 belt (Slow, Fast) areas of the AC:' newline])
@@ -80,11 +85,7 @@ for i=1:numSounds
     %     disp('Passing the sound through gammatone filterbank ... ')
     if hearingLossMode
         bm_upsampled = gammatoneFast(s,F,Fs);
-    else
-        bm_upsampled = gammatoneFast(s,F,Fs); 
-        % 16000 timepoints
-        % 100 frequency lengths 
-        
+
         % HEARING LOSS:
         
         % Values for pure tone audiogram fo SNHL
@@ -94,6 +95,11 @@ for i=1:numSounds
         % Apply hearing loss function
     
         bm_upsampled = hearing_loss(aud_freq, aud_hl, bm_upsampled, F);
+    else
+        bm_upsampled = gammatoneFast(s,F,Fs); 
+        % 16000 timepoints
+        % 100 frequency lengths 
+
     end
     
     %     color='k'; figureSpec(1:length(bm_upsampled),F,squeeze(bm_upsampled'),2,'Gammatone filter output',color);
@@ -380,50 +386,51 @@ for i=1:numSounds
 %     avg_FR_ex_slow_freq(i,:) = mean(squeeze(EE3),2);
 %     avg_FR_ex_fast_time(i,:) = mean(squeeze(EE4),1);
 %     avg_FR_ex_fast_freq(i,:) = mean(squeeze(EE4),2);
+    sound_data(i,1) = mean(mean(EE1,1));
+    sound_data(i,2) = std(mean(EE1,1));
+    sound_data(i,3) = max(mean(EE1,1));
+    sound_data(i,4) = length(findpeaks(mean(EE1,1)));
+    sound_data(i,5) = std(mean(EE1,2));
+    sound_data(i,6) = max(mean(EE1,2));
+    sound_data(i,7) = length(findpeaks(mean(EE1,2)));
 
-    %area A1
-    sound_data(i,1) = mean(EE1,'all');%mean frequency
-    sound_data(i,2) = std(mean(EE1,1)); %std over time
-    sound_data(i,3) = max(mean(EE1,1)); %max over time
-    sound_data(i,4) = length(findpeaks(mean(EE1,1))); %number of peaks over time
-    sound_data(i,5) = std(mean(EE1,2)); %std over freq
-    sound_data(i,6) = max(mean(EE1,2)); %max over freq
-    sound_data(i,7) = length(findpeaks(mean(EE1,2))); %number of peaks over freq
-    %area R
-    sound_data(i,8) = mean(EE2,'all');%mean frequency
+    sound_data(i,8) = mean(mean(EE2,1));
     sound_data(i,9) = std(mean(EE2,1));
     sound_data(i,10) = max(mean(EE2,1));
-    sound_data(i,11) = length(findpeaks(mean(EE2,1))); %number of peaks over time
+    sound_data(i,11) = length(findpeaks(mean(EE2,1)));
     sound_data(i,12) = std(mean(EE2,2));
-    sound_data(i,12) = std(mean(EE2,2));
-    sound_data(i,14) = length(mean(EE2,2)); %number of peaks over freq
-    %area slow
-    sound_data(i,15) = mean(EE3,'all');%mean frequency
+    sound_data(i,13) = max(mean(EE2,2));
+    sound_data(i,14) = length(findpeaks(mean(EE2,2)));
+
+    sound_data(i,15) = mean(mean(EE3,1));
     sound_data(i,16) = std(mean(EE3,1));
     sound_data(i,17) = max(mean(EE3,1));
-    sound_data(i,18) = length(findpeaks(mean(EE3,1))); %number of peaks over time
+    sound_data(i,18) = length(findpeaks(mean(EE3,1)));
     sound_data(i,19) = std(mean(EE3,2));
     sound_data(i,20) = max(mean(EE3,2));
-    sound_data(i,21) = length(mean(EE3,2)); %number of peaks over freq
-    %area fast
-    sound_data(i,2) = mean(EE4,'all');%mean frequency
+    sound_data(i,21) = length(findpeaks(mean(EE3,2)));
+
+    sound_data(i,22) = mean(mean(EE4,1));
     sound_data(i,23) = std(mean(EE4,1));
-    sound_data(i,24) = std(mean(EE4,1));
-    sound_data(i,25) = length(findpeaks(mean(EE4,1))); %number of peaks over time
+    sound_data(i,24) = max(mean(EE4,1));
+    sound_data(i,25) = length(findpeaks(mean(EE4,1)));
     sound_data(i,26) = std(mean(EE4,2));
-    sound_data(i,27) = std(mean(EE4,2));
-    sound_data(i,28) = length(mean(EE4,2)); %number of peaks over freq
+    sound_data(i,27) = max(mean(EE4,2));
+    sound_data(i,28) = length(findpeaks(mean(EE1,2)));
 
     disp(strcat('Finished iteration ', num2str(i), '! Time Elapsed = ', num2str(toc), ' sec'));
 end
 if hearingLossMode
     save('soundDataHL.mat', "sound_data")
+elseif CI_mode
+    save('soundDataCI.mat', "sound_data")
 else
     save('soundData.mat', "sound_data")
 end
 % save(strcat('allsoundavgs', '.mat'),"avg_FR_ex_fast_freq","avg_FR_ex_fast_time","avg_FR_ex_slow_freq","avg_FR_ex_slow_time", "avg_FR_ex_R_freq","avg_FR_ex_R_time","avg_FR_ex_A1_freq","avg_FR_ex_A1_time")
 % save('spectrograms.mat',"inhibitory_spec__fast", "inhibitory_spec__slow", "inhibitory_spec__R", "inhibitory_spec__A1", ...
 %     "exitatory_spec__fast", "exitatory_spec__slow", "exitatory_spec__R", "exitatory_spec__A1" )
+
 %     save(strcat('spectrograms', '.mat'), "exitatory_spec__fast", "exitatory_spec__slow", "exitatory_spec__R", "exitatory_spec__A1",'-v7.3')
 
 % end
