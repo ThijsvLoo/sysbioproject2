@@ -20,7 +20,7 @@
 
 close all; clear; clc; tic
 hearingLossMode = false;
-CI_mode = true;
+CI_mode = false;
 
 load('newmat.mat')
 %stim=newmat;
@@ -78,6 +78,7 @@ for i=1:numSounds
         % Values for pure tone audiogram fo SNHL
         aud_freq = [250, 500, 1000, 2000, 4000, 8000]; %HZ
         aud_hl = [30, 32, 35, 42, 45, 50]; %dB
+        % aud_hl = [15, 20, 22, 25, 25, 25]; %dB HL after CI - patient
         
         % Apply hearing loss function
     
@@ -379,16 +380,16 @@ for i=1:numSounds
     sound_data(i,4) = median(mean(EE1,1));
     [pks, locs] = findpeaks(mean(EE1,1)); 
     sound_data(i,5) = length(pks); 
-    sound_data(i,6) = mean(locs(pks > prctile(pks, 40))); 
-    sound_data(i,7) = std(locs(pks > prctile(pks, 40))); 
+    sound_data(i,6) = mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,7) = std(locs(pks >= prctile(pks, 40))); 
     sound_data(i,8) = mean(mean(EE1,2));
     sound_data(i,9) = std(mean(EE1,2));
     sound_data(i,10) = max(mean(EE1,2));
     sound_data(i,11) = median(mean(EE1,2));
     [pks, locs] = findpeaks(mean(EE1,2)); 
     sound_data(i,12) = length(pks); 
-    sound_data(i,13) = mean(locs(pks > prctile(pks, 40))); 
-    sound_data(i,14) = std(locs(pks > prctile(pks, 40))); 
+    sound_data(i,13) = mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,14) = std(locs(pks >= prctile(pks, 40))); 
     
     %R
     sound_data(i,15) = mean(mean(EE2,1));
@@ -397,16 +398,16 @@ for i=1:numSounds
     sound_data(i,18) = median(mean(EE2,1));
     [pks, locs] = findpeaks(mean(EE2,1));
     sound_data(i,19) = length(pks);
-    sound_data(i,20) = mean(locs(pks > prctile(pks, 40))); 
-    sound_data(i,21) = std(locs(pks > prctile(pks, 40))); 
+    sound_data(i,20) = mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,21) = std(locs(pks >= prctile(pks, 40))); 
     sound_data(i,22) = mean(mean(EE2,2));
     sound_data(i,23) = std(mean(EE2,2));
     sound_data(i,24) = max(mean(EE2,2));
     sound_data(i,25) = median(mean(EE2,2));
     [pks, locs] = findpeaks(mean(EE2,2));
     sound_data(i,26) = length(pks);
-    sound_data(i,27) = mean(locs(pks > prctile(pks, 40))); 
-    sound_data(i,28) = std(locs(pks > prctile(pks, 40))); 
+    sound_data(i,27) = mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,28) = std(locs(pks >= prctile(pks, 40))); 
     
     %SLOW
     sound_data(i,29) = mean(mean(EE3,1));
@@ -415,16 +416,16 @@ for i=1:numSounds
     sound_data(i,32) = median(mean(EE3,1));
     [pks, locs] = findpeaks(mean(EE3,1));
     sound_data(i,33) = length(pks);
-    sound_data(i,34) = mean(locs(pks > prctile(pks, 40))); 
-    sound_data(i,35) = std(locs(pks > prctile(pks, 40))); 
+    sound_data(i,34) = mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,35) = std(locs(pks >= prctile(pks, 40))); 
     sound_data(i,36) = mean(mean(EE3,2));
     sound_data(i,37) = std(mean(EE3,2));
     sound_data(i,38) = max(mean(EE3,2));
     sound_data(i,39) = median(mean(EE3,2));
     [pks, locs] = findpeaks(mean(EE3,2));
     sound_data(i,40) = length(pks);
-    sound_data(i,41) =  mean(locs(pks > prctile(pks, 40))); 
-    sound_data(i,42) = std(locs(pks > prctile(pks, 40))); 
+    sound_data(i,41) =  mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,42) = std(locs(pks >= prctile(pks, 40))); 
     
     %FAST
     sound_data(i,43) = mean(mean(EE4,1));
@@ -433,16 +434,16 @@ for i=1:numSounds
     sound_data(i,46) = median(mean(EE4,1));
     [pks, locs] = findpeaks(mean(EE4,1));
     sound_data(i,47) = length(pks);
-    sound_data(i,48) = mean(locs(pks > prctile(pks, 40))); 
-    sound_data(i,49) = std(locs(pks > prctile(pks, 40))); 
+    sound_data(i,48) = mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,49) = std(locs(pks >= prctile(pks, 40))); 
     sound_data(i,50) = mean(mean(EE4,2));
     sound_data(i,51) = std(mean(EE4,2));
     sound_data(i,52) = max(mean(EE4,2));
     sound_data(i,53) = median(mean(EE4,2));
     [pks, locs] = findpeaks(mean(EE4,2));
     sound_data(i,54) = length(pks);
-    sound_data(i,55) =  mean(locs(pks > prctile(pks, 40))); 
-    sound_data(i,56) = std(locs(pks > prctile(pks, 40)));
+    sound_data(i,55) =  mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,56) = std(locs(pks >= prctile(pks, 40)));
     
     %CORRELATIONS
     corr = corrcoef(mean(EE1,1),mean(EE2,1));  sound_data(i,57) = corr(2);
