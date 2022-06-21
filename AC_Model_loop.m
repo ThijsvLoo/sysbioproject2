@@ -18,12 +18,44 @@
 
 % Author: Isma Zulfiqar
 
-close all; clear; clc; tic
-hearingLossMode = false; %boolean indicating if hearing loss should be simulated
-afterCI_mode = false; %if afterCI_mode = T, hearingLossMode MUST = T
-CI_mode = false;%booling indicating if cochlear implant should be simulated
 
-load('newmat.mat')
+% this version has all outputs supressed and loops through all sounds and
+% saves the ouput
+
+close all; clear; clc; tic
+
+
+% Select which mode
+% hearingLossMode = false; %boolean indicating if hearing loss should be simulated
+% afterCI_mode = false; %if afterCI_mode = T, hearingLossMode MUST = T
+% CI_mode = true;%booling indicating if cochlear implant should be simulated
+
+mode = 'CI'; % options are: 'healthy', 'HL', 'HLCI', 'CI'
+
+if strcmp(mode,'healthy')
+    hearingLossMode = false;
+    afterCI_mode = false;
+    CI_mode = false;
+elseif strcmp(mode,'HL')
+    hearingLossMode = true;
+    afterCI_mode = false;
+    CI_mode = false;
+elseif strcmp(mode,'HLCI')
+    hearingLossMode = true;
+    afterCI_mode = true;
+    CI_mode = false;
+elseif strcmp(mode,'CI')
+    hearingLossMode = false;
+    afterCI_mode = false;
+    CI_mode = true;
+else
+    disp('no valid option selected')
+end
+
+disp(strcat(mode, " mode selected"));
+
+
+load('newmat_PS.mat')
 %stim=newmat;
 %fs=16000;
 
@@ -46,7 +78,6 @@ soundClasses = ["speech", "voice", "animal", "music", "nature", "tools"];
 
 %% Generating input sound
 
-% for j=1:length(soundClasses)
 for i=1:numSounds
 
     duration = 1; % second
@@ -61,8 +92,12 @@ for i=1:numSounds
     % s = (1+(mod_depth*sin(2*pi*mod_rate*t -pi/2))) .* sin(2*pi*carrier_freq*t);
     s = stim(i,:)'*1000;
     if CI_mode
-        s = newmat(1, 1:16000)' .* 1000;
+        s = newmat(i, 1:16000)' .* 1000;
     end
+    %     figure(1); plot(t,s); xlabel('Time'); ylabel('Amplitude'); title('Sound waveform');
+    size_s = size(s);
+    s = s + wgn(size_s(1),size_s(2),0);
+    
     %     figure(1); plot(t,s); xlabel('Time'); ylabel('Amplitude'); title('Sound waveform');
 
     % =============================================================================================
@@ -424,15 +459,6 @@ elseif CI_mode
 else
     save('soundData.mat', "sound_data")
 end
-% save(strcat('allsoundavgs', '.mat'),"avg_FR_ex_fast_freq","avg_FR_ex_fast_time","avg_FR_ex_slow_freq","avg_FR_ex_slow_time", "avg_FR_ex_R_freq","avg_FR_ex_R_time","avg_FR_ex_A1_freq","avg_FR_ex_A1_time")
-% save('spectrograms.mat',"inhibitory_spec__fast", "inhibitory_spec__slow", "inhibitory_spec__R", "inhibitory_spec__A1", ...
-%     "exitatory_spec__fast", "exitatory_spec__slow", "exitatory_spec__R", "exitatory_spec__A1" )
-
-%     save(strcat('spectrograms', '.mat'), "exitatory_spec__fast", "exitatory_spec__slow", "exitatory_spec__R", "exitatory_spec__A1",'-v7.3')
-
-% end
-
-
 
 
 
