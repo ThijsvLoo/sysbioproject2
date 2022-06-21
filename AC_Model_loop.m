@@ -19,8 +19,9 @@
 % Author: Isma Zulfiqar
 
 close all; clear; clc; tic
-hearingLossMode = false;  afterCI_mode = false; %if afterCI_mode = T, hearingLossMode MUST = T
-CI_mode = true;
+hearingLossMode = false; %boolean indicating if hearing loss should be simulated
+afterCI_mode = false; %if afterCI_mode = T, hearingLossMode MUST = T
+CI_mode = false;%booling indicating if cochlear implant should be simulated
 
 load('newmat.mat')
 %stim=newmat;
@@ -39,7 +40,7 @@ disp(['Model spans ' num2str(lim1_frqaxis) ' Hz to ' num2str(lim2_frqaxis) ' Hz 
 
 numSounds = size(stim,1);
 
-sound_data = zeros(numSounds,16);
+sound_data = zeros(numSounds,124);%124 is the 26 features, and 98 frequency band means
 
 soundClasses = ["speech", "voice", "animal", "music", "nature", "tools"];
 
@@ -360,86 +361,54 @@ for i=1:numSounds
 
     %% end of loop
     % data used:
-    % mean (temporal / spectral)
+    % mean
     % std (temporal / spectral)
     % max (temporal / spectral)
     % median (temporal / spectral)
     % number of peaks (temporal / spectral)
     % mean location of top 40% peaks (temporal / spectral)
     % std of location of top 40% peaks (temporal / spectral)
-
-
-    %A1
-    sound_data(i,1) = mean(mean(EE1,1));
-    sound_data(i,2) = std(mean(EE1,1));
-    sound_data(i,3) = max(mean(EE1,1));
-    sound_data(i,4) = median(mean(EE1,1));
-    [pks, locs] = findpeaks(mean(EE1,1)); 
-    sound_data(i,5) = length(pks); 
-    sound_data(i,6) = mean(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,7) = std(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,8) = mean(mean(EE1,2));
-    sound_data(i,9) = std(mean(EE1,2));
-    sound_data(i,10) = max(mean(EE1,2));
-    sound_data(i,11) = median(mean(EE1,2));
-    [pks, locs] = findpeaks(mean(EE1,2)); 
-    sound_data(i,12) = length(pks); 
-    sound_data(i,13) = mean(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,14) = std(locs(pks >= prctile(pks, 40))); 
-    
-    %R
-    sound_data(i,15) = mean(mean(EE2,1));
-    sound_data(i,16) = std(mean(EE2,1));
-    sound_data(i,17) = max(mean(EE2,1));
-    sound_data(i,18) = median(mean(EE2,1));
-    [pks, locs] = findpeaks(mean(EE2,1));
-    sound_data(i,19) = length(pks);
-    sound_data(i,20) = mean(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,21) = std(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,22) = mean(mean(EE2,2));
-    sound_data(i,23) = std(mean(EE2,2));
-    sound_data(i,24) = max(mean(EE2,2));
-    sound_data(i,25) = median(mean(EE2,2));
-    [pks, locs] = findpeaks(mean(EE2,2));
-    sound_data(i,26) = length(pks);
-    sound_data(i,27) = mean(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,28) = std(locs(pks >= prctile(pks, 40))); 
     
     %SLOW
-    sound_data(i,29) = mean(mean(EE3,1));
-    sound_data(i,30) = std(mean(EE3,1));
-    sound_data(i,31) = max(mean(EE3,1));
-    sound_data(i,32) = median(mean(EE3,1));
+    sound_data(i,1) = mean(EE3,'all');
+    sound_data(i,2) = std(mean(EE3,1));
+    sound_data(i,3) = max(mean(EE3,1));
+    sound_data(i,4) = median(mean(EE3,1));
     [pks, locs] = findpeaks(mean(EE3,1));
-    sound_data(i,33) = length(pks);
-    sound_data(i,34) = mean(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,35) = std(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,36) = mean(mean(EE3,2));
-    sound_data(i,37) = std(mean(EE3,2));
-    sound_data(i,38) = max(mean(EE3,2));
-    sound_data(i,39) = median(mean(EE3,2));
+    sound_data(i,5) = length(pks);
+    sound_data(i,5) = mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,7) = std(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,8) = std(mean(EE3,2));
+    sound_data(i,9) = max(mean(EE3,2));
+    sound_data(i,10) = median(mean(EE3,2));
     [pks, locs] = findpeaks(mean(EE3,2));
-    sound_data(i,40) = length(pks);
-    sound_data(i,41) =  mean(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,42) = std(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,11) = length(pks);
+    sound_data(i,12) =  mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,13) = std(locs(pks >= prctile(pks, 40))); 
     
     %FAST
-    sound_data(i,43) = mean(mean(EE4,1));
-    sound_data(i,44) = std(mean(EE4,1));
-    sound_data(i,45) = max(mean(EE4,1));
-    sound_data(i,46) = median(mean(EE4,1));
+    sound_data(i,14) = mean(EE4,'all');
+    sound_data(i,14) = std(mean(EE4,1));
+    sound_data(i,15) = max(mean(EE4,1));
+    sound_data(i,17) = median(mean(EE4,1));
     [pks, locs] = findpeaks(mean(EE4,1));
-    sound_data(i,47) = length(pks);
-    sound_data(i,48) = mean(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,49) = std(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,50) = mean(mean(EE4,2));
-    sound_data(i,51) = std(mean(EE4,2));
-    sound_data(i,52) = max(mean(EE4,2));
-    sound_data(i,53) = median(mean(EE4,2));
+    sound_data(i,18) = length(pks);
+    sound_data(i,19) = mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,20) = std(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,21) = std(mean(EE4,2));
+    sound_data(i,22) = max(mean(EE4,2));
+    sound_data(i,23) = median(mean(EE4,2));
     [pks, locs] = findpeaks(mean(EE4,2));
-    sound_data(i,54) = length(pks);
-    sound_data(i,55) =  mean(locs(pks >= prctile(pks, 40))); 
-    sound_data(i,56) = std(locs(pks >= prctile(pks, 40)));
+    sound_data(i,24) = length(pks);
+    sound_data(i,25) =  mean(locs(pks >= prctile(pks, 40))); 
+    sound_data(i,26) = std(locs(pks >= prctile(pks, 40)));
+
+    for band=1:size(EE3,1)
+        sound_data(i,26+band) = mean(EE3(band,:));
+    end
+
+
+
     
     
     disp(strcat('Finished iteration ', num2str(i), '! Time Elapsed = ', num2str(toc), ' sec'));
