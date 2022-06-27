@@ -1,0 +1,236 @@
+												STATISTICS:
+------------------------------------------------------------------------------------------------
+
+---------------------------
+3 scenarios (healthy/pre-treatment HL/CI):
+---------------------------
+A) 6 sounds
+---------------------------
+Component 1 
+healthy : 6.94967449966381e-11 
+             animal      music       nature       speech      tools
+music  7.975577e-04         NA           NA           NA         NA
+nature 2.805794e-06 0.85689718           NA           NA         NA
+speech 4.641220e-07 0.82479363 8.568972e-01           NA         NA
+tools  8.568972e-01 0.01559592 5.116639e-05 1.511571e-05         NA
+voice  1.494098e-03 0.85689718 1.598993e-01 3.074590e-02 0.07619889
+
+pre-treatment HL : 6.72129305973448e-09 
+            animal        music       nature    speech      tools
+music  0.126070498           NA           NA        NA         NA
+nature 0.138343233 8.289251e-06           NA        NA         NA
+speech 0.046638885 1.000000e+00 4.328123e-05        NA         NA
+tools  1.000000000 2.251270e-01 3.843238e-02 0.1345611         NA
+voice  0.004748871 1.345611e-01 1.298812e-06 1.0000000 0.01519535
+
+CI : 4.8481515522321e-13 
+             animal        music     nature      speech        tools
+music  6.422834e-05           NA         NA          NA           NA
+nature 7.133674e-06 1.0000000000         NA          NA           NA
+speech 1.517302e-08 0.5472951216 1.00000000          NA           NA
+tools  1.000000e+00 0.0009709619 0.00021727 3.83812e-08           NA
+voice  3.590474e-05 1.0000000000 1.00000000 3.55892e-01 0.0005094486
+
+
+
+Component 2 
+healthy : 6.49554868772436e-16 
+             animal        music       nature       speech      tools
+music  9.376921e-02           NA           NA           NA         NA
+nature 1.000000e+00 1.000000e+00           NA           NA         NA
+speech 1.251161e-11 2.248105e-09 5.958439e-10           NA         NA
+tools  1.000000e+00 1.000000e+00 1.000000e+00 3.908591e-10         NA
+voice  1.494098e-03 2.265973e-01 7.671004e-02 4.135307e-04 0.03458914
+
+pre-treatment HL : 5.19193647713985e-14 
+             animal        music      nature       speech        tools
+music  2.060799e-03           NA          NA           NA           NA
+nature 2.282380e-02 0.9499054652          NA           NA           NA
+speech 1.069705e-10 0.0001360896 0.007311739           NA           NA
+tools  9.499055e-01 0.0228237993 0.128318477 2.383477e-09           NA
+voice  5.671785e-06 0.5913559609 0.782032611 4.089893e-03 0.0001254446
+
+CI : 1.90501051201332e-16 
+             animal        music       nature       speech       tools
+music  3.978725e-03           NA           NA           NA          NA
+nature 4.648177e-03 1.000000e+00           NA           NA          NA
+speech 5.007296e-12 1.229976e-07 8.261044e-08           NA          NA
+tools  1.000000e+00 5.876898e-02 5.876898e-02 2.141151e-10          NA
+voice  3.305528e-04 1.000000e+00 1.000000e+00 4.267818e-04 0.008957913
+
+
+
+Component 3 
+healthy : 3.2466935041764e-14 
+             animal        music       nature    speech tools
+music  3.383433e-04           NA           NA        NA    NA
+nature 2.073616e-10 0.0001726147           NA        NA    NA
+speech 1.172278e-04 0.2175598110 5.811774e-08        NA    NA
+tools  2.429139e-02 1.0000000000 1.189434e-04 1.0000000    NA
+voice  4.060328e-02 0.0681073976 1.780278e-08 0.6869992     1
+
+pre-treatment HL : 0.00027998492437531 
+             animal       music    nature     speech tools
+music  1.0000000000          NA        NA         NA    NA
+nature 0.4746538044 0.997998612        NA         NA    NA
+speech 0.0001115218 0.002352886 0.3511164         NA    NA
+tools  0.9979986117 1.000000000 1.0000000 0.02955603    NA
+voice  0.3796480334 0.997998612 1.0000000 0.52379541     1
+
+CI : 3.61968613803912e-17 
+             animal      music       nature       speech     tools
+music  1.683453e-06         NA           NA           NA        NA
+nature 8.617846e-10 0.02649798           NA           NA        NA
+speech 1.548566e-11 0.30716013 3.071601e-01           NA        NA
+tools  3.071601e-01 0.01885739 2.501565e-05 1.116294e-05        NA
+voice  1.524493e-04 0.14629848 6.691309e-05 1.116294e-05 0.3071601
+
+
+
+Component 4 
+healthy : 1.83724979202567e-08 
+           animal        music       nature     speech     tools
+music  0.00144224           NA           NA         NA        NA
+nature 0.01249601 7.055682e-01           NA         NA        NA
+speech 0.86172077 4.436440e-02 1.483466e-01         NA        NA
+tools  0.82958268 2.505741e-02 1.660119e-01 0.95617254        NA
+voice  0.16601188 2.189518e-06 5.038360e-06 0.02505741 0.0215821
+
+pre-treatment HL : 6.66235123181332e-09 
+            animal        music      nature    speech     tools
+music  0.185573070           NA          NA        NA        NA
+nature 1.000000000 5.966858e-02          NA        NA        NA
+speech 0.003112471 4.485895e-06 0.003253868        NA        NA
+tools  1.000000000 6.601030e-02 1.000000000 0.1855731        NA
+voice  0.003112471 1.247216e-06 0.001203379 1.0000000 0.0957094
+
+CI : 2.55714259893057e-06 
+             animal       music      nature speech tools
+music  0.0003944437          NA          NA     NA    NA
+nature 0.0003594015 1.000000000          NA     NA    NA
+speech 1.0000000000 0.082693499 0.242908810     NA    NA
+tools  1.0000000000 0.003288740 0.001358046      1    NA
+voice  1.0000000000 0.003202521 0.005355697      1     1
+
+
+---------------------------
+B) 3 scenarios
+---------------------------
+Component 1 :	 8.14861195402341e-126 
+                  CI     healthy
+healthy 2.027959e-01          NA
+pre-treatment HL      2.617750e-95 2.61775e-95
+
+Component 2 :	 9.79261479422709e-126 
+                  CI     healthy
+healthy 3.723586e-01          NA
+pre-treatment HL      2.617750e-95 2.61775e-95
+
+Component 3 :	 2.0232467122037e-127 
+                  CI     healthy
+healthy 1.945621e-05          NA
+pre-treatment HL      2.617750e-95 2.61775e-95
+
+Component 4 :	 1.36662642107681e-127 
+                  CI     healthy
+healthy 7.718794e-06          NA
+pre-treatment HL      2.617750e-95 2.61775e-95
+
+------------------------------------------------------------------------------------------------
+
+
+---------------------------
+2 scenarios (CI/post-treatment HL):
+---------------------------
+A) 6 sounds
+---------------------------
+Component 1 
+CI : 4.8481515522321e-13 
+             animal        music     nature      speech        tools
+music  6.422834e-05           NA         NA          NA           NA
+nature 7.133674e-06 1.0000000000         NA          NA           NA
+speech 1.517302e-08 0.5472951216 1.00000000          NA           NA
+tools  1.000000e+00 0.0009709619 0.00021727 3.83812e-08           NA
+voice  3.590474e-05 1.0000000000 1.00000000 3.55892e-01 0.0005094486
+
+post-treatment HL : 1.06809579732975e-12 
+             animal      music       nature       speech tools
+music  1.319425e-01         NA           NA           NA    NA
+nature 3.207812e-08 0.01181525           NA           NA    NA
+speech 3.170884e-06 0.14271398 4.997945e-01           NA    NA
+tools  1.000000e+00 0.49979453 2.297649e-05 1.250472e-03    NA
+voice  1.000000e+00 0.12862884 2.089504e-08 5.038250e-06     1
+
+
+
+Component 2 
+CI : 1.90501051201332e-16 
+             animal        music       nature       speech       tools
+music  3.978725e-03           NA           NA           NA          NA
+nature 4.648177e-03 1.000000e+00           NA           NA          NA
+speech 5.007296e-12 1.229976e-07 8.261044e-08           NA          NA
+tools  1.000000e+00 5.876898e-02 5.876898e-02 2.141151e-10          NA
+voice  3.305528e-04 1.000000e+00 1.000000e+00 4.267818e-04 0.008957913
+
+post-treatment HL : 4.11550414940231e-07 
+             animal     music     nature    speech     tools
+music  6.254047e-03        NA         NA        NA        NA
+nature 8.231162e-06 0.3797230         NA        NA        NA
+speech 8.231162e-06 0.4908254 1.00000000        NA        NA
+tools  2.941117e-01 0.8590402 0.04130035 0.0542192        NA
+voice  2.838465e-03 1.0000000 0.48033739 0.4908254 0.7735073
+
+
+
+Component 3 
+CI : 3.61968613803912e-17 
+             animal      music       nature       speech     tools
+music  1.683453e-06         NA           NA           NA        NA
+nature 8.617846e-10 0.02649798           NA           NA        NA
+speech 1.548566e-11 0.30716013 3.071601e-01           NA        NA
+tools  3.071601e-01 0.01885739 2.501565e-05 1.116294e-05        NA
+voice  1.524493e-04 0.14629848 6.691309e-05 1.116294e-05 0.3071601
+
+post-treatment HL : 7.71193620811217e-14 
+            animal        music       nature       speech       tools
+music  0.000901539           NA           NA           NA          NA
+nature 0.088155596 1.247100e-01           NA           NA          NA
+speech 0.002022562 4.187776e-10 2.135900e-08           NA          NA
+tools  0.206380954 2.998767e-01 9.037656e-01 1.434008e-06          NA
+voice  0.206866194 3.225254e-05 1.044651e-03 4.020256e-01 0.002530799
+
+
+
+Component 4 
+CI : 2.55714259893057e-06 
+             animal       music      nature speech tools
+music  0.0003944437          NA          NA     NA    NA
+nature 0.0003594015 1.000000000          NA     NA    NA
+speech 1.0000000000 0.082693499 0.242908810     NA    NA
+tools  1.0000000000 0.003288740 0.001358046      1    NA
+voice  1.0000000000 0.003202521 0.005355697      1     1
+
+post-treatment HL : 1.19823908565111e-13 
+             animal        music      nature       speech       tools
+music  9.918413e-03           NA          NA           NA          NA
+nature 1.081813e-03 1.0000000000          NA           NA          NA
+speech 4.491365e-12 0.0006185224 0.006658552           NA          NA
+tools  1.000000e+00 0.0803930235 0.009918413 1.622141e-09          NA
+voice  3.433365e-04 1.0000000000 1.000000000 3.075483e-03 0.006658552
+
+
+
+---------------------------
+B) 2 scenarios (CI/post-treatment HL)
+---------------------------
+Component 1 :	 4.0788442014298e-90 
+Component 2 :	 1.91266657677559e-53 
+Component 3 :	 4.03531914948564e-93 
+Component 4 :	 6.3321105436321e-77 
+
+
+---------------------------
+B2) 2 scenarios (healthy/CI)
+---------------------------
+Component 1 :	 0.202795936730776 Component 2 :	 0.372358583242055 Component 3 :	 1.94562101186271e-05 Component 4 :	 7.71879402211672e-06
+
